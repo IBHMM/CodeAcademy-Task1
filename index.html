@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>User Management</title>
+   <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <table>
+       <input type="text" id="search-input" placeholder="Search by name or email">
+       <thead>
+           <tr>
+               <th>Name</th>
+               <th>Address</th>
+               <th>Email</th>
+               <th>Phone Number</th>
+               <th>Job</th>
+               <th>Company</th>
+               <th>Age</th>
+               <th>Retired</th>
+           </tr>
+       </thead>
+       <tbody id="user-table-body">
+           <!-- Data will be populated here -->
+       </tbody>
+   </table>
+   <div id="pagination-controls">
+       <button id="previous-button">Previous</button>
+       <span id="pagination-info">Page 1 of N</span>
+       <button id="next-button">Next</button>
+   </div>
+
+   <script src="./script.mjs" type="module"></script>
+</body>
+</html>
