@@ -7,6 +7,7 @@ const users = [];
 let pages = 0;
 let currentpage = 1;
 let searching = '';
+const maxpeople = 5;
 
 const prev = document.querySelector("#previous-button");
 const next = document.querySelector("#next-button");
@@ -39,27 +40,30 @@ async function PopulatePerson() {
         per.company,
         per.address
     )));
-    pages = Math.ceil(users.length / 20);
+    pages = Math.ceil(users.length / maxpeople);
 }
 
-function searchPerson(query) {
-    if (!query) {
+function searchPerson(search) {
+    if (!search) {
         return users; 
     }
     
-    query = query.toLowerCase();
+    search = search.toLowerCase();
     return users.filter(user => 
-        user.name.toLowerCase().includes(query) ||
-        user.email.toLowerCase().includes(query)
+        user.name.toLowerCase().includes(search) ||
+        user.email.toLowerCase().includes(search) || 
+        user.job.toLowerCase().includes(search) || 
+        user.address.toLowerCase().includes(search) || 
+        user.company.toLowerCase().includes(search)
     );
 }
 
 function SetTable(displayUsers) {
     tbody.innerHTML = "";
-    const totalPages = Math.ceil(displayUsers.length / 20);
+    const totalPages = Math.ceil(displayUsers.length / maxpeople);
     htmlpages.innerText = `page ${currentpage} of ${totalPages}`;
-    const start = (currentpage - 1) * 20;
-    const end = start + 20;
+    const start = (currentpage - 1) * maxpeople;
+    const end = start + maxpeople;
     
     displayUsers.slice(start, end).forEach(user => {
         const tr = elementCreater("tr");
@@ -110,6 +114,6 @@ input.addEventListener("input", e => {
     searching = e.target.value;
     const searchResults = searchPerson(searching);
     currentpage = 1;
-    pages = Math.ceil(searchResults.length / 20);
+    pages = Math.ceil(searchResults.length / maxpeople);
     SetTable(searchResults);
 });
